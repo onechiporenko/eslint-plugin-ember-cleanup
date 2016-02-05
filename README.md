@@ -1,6 +1,9 @@
 # eslint-plugin-ember-cleanup
 
-  
+[![Build Status](https://travis-ci.org/onechiporenko/eslint-plugin-ember-cleanup.svg)](https://travis-ci.org/onechiporenko/eslint-plugin-ember-cleanup)
+[![npm version](https://badge.fury.io/js/eslint-plugin-ember-cleanup.png)](http://badge.fury.io/js/eslint-plugin-ember-cleanup)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+[![Downloads](http://img.shields.io/npm/dm/eslint-plugin-ember-cleanup.svg)](https://www.npmjs.com/package/eslint-plugin-ember-cleanup)
 
 ## Installation
 
