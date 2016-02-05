@@ -46,10 +46,10 @@ Then configure the rules you want to use under the rules section.
 * `destructuring` Looks for usage `Ember.*` many times and propose to replace it with `const {} = Ember;` 
 * `max-dep-keys` Check number of dependent keys for observers and computed properties. May be customized with `max` - maximum number of dependent keys (default `3`), `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
 
-```json
+```
 {
     "rules": [
-        "ember-cleanup/max-dep-keys": [2, {max: 5, tryExpandKeys: true}]
+        "ember-cleanup/max-dep-keys": [2, {"max": 5, "tryExpandKeys": true}]
     ]
 }
 ```
@@ -57,10 +57,10 @@ Then configure the rules you want to use under the rules section.
 * `no-console` Propose to use `Ember.Logger` instead of `console`
 * `no-dup-keys` Check for duplicated dependent keys for observers and computed properties. May be customized with `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
 
-```json
+```
 {
     "rules": [
-        "ember-cleanup/no-dup-keys": [2, {tryExpandKeys: true}]
+        "ember-cleanup/no-dup-keys": [2, {"tryExpandKeys": true}]
     ]
 }
 ```
@@ -79,9 +79,9 @@ Add to your eslint config-file:
 ],
 "rules": {
     "ember-cleanup/destructuring": 1,
-    "ember-cleanup/max-dep-keys": [2, {max: 5, tryExpandKeys: true}],
+    "ember-cleanup/max-dep-keys": [2, {"max": 5, "tryExpandKeys": true}],
     "ember-cleanup/no-console": 1,
-    "ember-cleanup/no-dup-keys": [2, {tryExpandKeys: true}],
+    "ember-cleanup/no-dup-keys": [2, {"tryExpandKeys": true}],
     "ember-cleanup/no-settimeout": 2,
     "ember-cleanup/no-throw": 2,
     "ember-cleanup/no-typeof": 2

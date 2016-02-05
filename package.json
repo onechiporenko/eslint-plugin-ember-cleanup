@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-ember-cleanup",
   "version": "1.0.0",
-  "description": "  ",
+  "description": "Check Ember-code for some potential issues",
   "keywords": [
     "eslint",
     "eslintplugin",
