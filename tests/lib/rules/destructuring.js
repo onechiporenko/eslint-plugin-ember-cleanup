@@ -84,7 +84,7 @@ j
 
 var invalidTests = j
   .setTemplates(invalidTestTemplates)
-  .createCombos(["code", "errors.0.message", "errors.1.message", "errors.2.message", "errors.3.message"], emberUsages)
+  .createCombos(["code", "errors.@each.message"], emberUsages)
   .uniqueCombos()
   .getCombos()
   .filter(function (c) {

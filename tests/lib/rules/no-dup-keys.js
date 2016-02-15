@@ -128,7 +128,7 @@ var invalidTestsForExpand = j
   .createCombos(["code"], codes)
   .uniqueCombos()
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.max", "options.0.tryExpandKeys", "errors.0.message", "errors.1.message"], invalidKeysForExpand)
+  .createCombos(["code", "options.0.max", "options.0.tryExpandKeys", "errors.@each.message"], invalidKeysForExpand)
   .getCombos()
   .map(prepareOptions);
 
@@ -141,7 +141,7 @@ var invalidTests = j
   .createCombos(["code"], codes)
   .uniqueCombos()
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.max", "errors.0.message", "errors.1.message"], invalidKeys)
+  .createCombos(["code", "options.0.max", "errors.@each.message"], invalidKeys)
   .uniqueCombos()
   .getCombos()
   .map(prepareOptions)

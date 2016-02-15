@@ -88,7 +88,7 @@ var invalidTestsForExpand = j
   .createCombos(["code"], codes)
   .uniqueCombos()
   .useCombosAsTemplates()
-  .createCombos(["code", "errors.0.message", "errors.1.message"], invalidKeysForExpand)
+  .createCombos(["code", "errors.@each.message"], invalidKeysForExpand)
   .getCombos();
 
 var ruleTester = new RuleTester();
