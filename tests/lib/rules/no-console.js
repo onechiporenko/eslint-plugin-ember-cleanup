@@ -77,7 +77,7 @@ j
 
 var invalidTests = j
   .setTemplates(invalidTestTemplates)
-  .createCombos(["code", "errors.0.message"], methods)
+  .createCombos(["code", "errors.@each.message"], methods)
   .uniqueCombos()
   .useCombosAsTemplates()
   .createCombos(["code"], {CONSOLE: "console"})
