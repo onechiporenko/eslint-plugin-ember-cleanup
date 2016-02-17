@@ -44,14 +44,14 @@ var invalidTestTemplates = [
   },
   {
     code:
-      "{{CONSOLE}}.{{METHOD}}();",
+      "{{CONSOLE}}.{{METHOD}}{{MOD}}();",
     errors: [
       {message: "`Ember.Logger.{{METHOD}}` should be used."}
     ]
   },
   {
     code:
-      "{{CONSOLE}}['{{METHOD}}']();",
+      "{{CONSOLE}}['{{METHOD}}']{{MOD}}();",
     errors: [
       {message: "`Ember.Logger.{{METHOD}}` should be used."}
     ]
@@ -64,7 +64,7 @@ var validTests = j
   .createCombos(["code"], methods)
   .uniqueCombos()
   .useCombosAsTemplates()
-  .createCombos(["code"], {CONSOLE: "Ember.Logger"})
+  .createCombos(["code"], {CONSOLE: "Ember.Logger", MOD: ""})
   .uniqueCombos()
   .getCombos()
   .map(function (c) {
@@ -81,6 +81,9 @@ var invalidTests = j
   .uniqueCombos()
   .useCombosAsTemplates()
   .createCombos(["code"], {CONSOLE: "console"})
+  .uniqueCombos()
+  .useCombosAsTemplates()
+  .createCombos(["code"], [{MOD: ".apply"}, {MOD: ".call"}, {MOD: ""}])
   .uniqueCombos()
   .getCombos();
 

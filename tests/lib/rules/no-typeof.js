@@ -97,7 +97,7 @@ var validTests = j
   .createCombos(["code", "options.0.disallowed.0"], types)
   .uniqueCombos()
   .useCombosAsTemplates()
-  .createCombos(["code"], {TYPEOF: "Ember.typeOf("})
+  .createCombos(["code"], [{TYPEOF: "Ember.typeOf("}, {TYPEOF: "Ember['typeOf']("}])
   .uniqueCombos()
   .useCombosAsTemplates()
   .createCombos(["code"], {FOO: "foo)"})

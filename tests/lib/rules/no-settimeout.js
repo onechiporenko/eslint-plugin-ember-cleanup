@@ -23,16 +23,34 @@ var m = "`Ember.run.later` should be used.";
 var validTests = [
   {code: "Ember.run.later(obj, function () {}, 1000);"},
   {code: "notWindow.setTimeout();"},
+  {code: "notWindow.setTimeout.call();"},
+  {code: "notWindow.setTimeout.apply();"},
+  {code: "notWindow['setTimeout']();"},
+  {code: "notWindow['setTimeout'].call();"},
+  {code: "notWindow['setTimeout'].apply();"},
   {code: "setTimeout;"},
   {code: "window.setTimeout;"},
-  {code: "notInCase.settimeout();"}
+  {code: "window['setTimeout'];"},
+  {code: "notInCase.settimeout();"},
+  {code: "notInCase['settimeout']();"}
 ];
 
 var invalidCodes = [
   {CODE: "setTimeout();"},
+  {CODE: "setTimeout.call();"},
+  {CODE: "setTimeout.apply();"},
   {CODE: "window.setTimeout();"},
+  {CODE: "window.setTimeout.call();"},
+  {CODE: "window.setTimeout.apply();"},
+  {CODE: "window['setTimeout']();"},
+  {CODE: "window['setTimeout'].call();"},
+  {CODE: "window['setTimeout'].apply();"},
   {CODE: "setTimeout(function () {}, 1000);"},
-  {CODE: "window.setTimeout(function () {}, 1000);"}
+  {CODE: "setTimeout.call(function () {}, 1000);"},
+  {CODE: "setTimeout.apply(function () {}, 1000);"},
+  {CODE: "window['setTimeout'](function () {}, 1000);"},
+  {CODE: "window['setTimeout'].call(function () {}, 1000);"},
+  {CODE: "window['setTimeout'].apply(function () {}, 1000);"}
 ];
 
 var invalidTestsTemplates = [

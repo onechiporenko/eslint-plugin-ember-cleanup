@@ -47,7 +47,7 @@ Then configure the rules you want to use under the rules section.
 ## Supported Rules
 
 * `destructuring` Looks for usage `Ember.*` many times and propose to replace it with `const {} = Ember;` 
-* `max-dep-keys` Check number of dependent keys for observers and computed properties. May be customized with `max` - maximum number of dependent keys (default `3`), `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
+* `max-dep-keys` Checks number of dependent keys for observers and computed properties. May be customized with `max` - maximum number of dependent keys (default `3`), `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
 
 ```
 {
@@ -58,7 +58,7 @@ Then configure the rules you want to use under the rules section.
 ```
 
 * `no-console` Propose to use `Ember.Logger` instead of `console`
-* `no-dup-keys` Check for duplicated dependent keys for observers and computed properties. May be customized with `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
+* `no-dup-keys` Checks for duplicated dependent keys for observers and computed properties. May be customized with `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
 
 ```
 {
@@ -81,6 +81,7 @@ Then configure the rules you want to use under the rules section.
 ```
 
 * `cp-brace-expansion` Checks dependent keys for possibility to do brace expansion
+* `no-is-array` Checks for array detection and propose to use `Ember.isArray`
 
 ## Usage
 
@@ -98,6 +99,7 @@ Add to your eslint config-file:
     "ember-cleanup/no-settimeout": 2,
     "ember-cleanup/no-throw": 2,
     "ember-cleanup/no-typeof": [2, {"disallowed": ["object"]}],
-    "ember-cleanup/cp-brace-expansion": 2
+    "ember-cleanup/cp-brace-expansion": 2,
+    "ember-cleanup/no-is-array": 2
 }
 ```
