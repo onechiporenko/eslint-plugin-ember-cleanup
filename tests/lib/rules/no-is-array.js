@@ -90,15 +90,7 @@ var invalidTests = j
   .createCombos(["code"], {RESULT: "'array'"})
   .uniqueCombos()
   .getCombos();
-invalidTests = j
-  .setTemplates(invalidTestTemplates)
-  .createCombos(["code"], operators)
-  .uniqueCombos()
-  .useCombosAsTemplates()
-  .createCombos(["code"], {IS_ARRAY: "typeof", MOD: "", RESULT: "'array'", FOO: "foo"})
-  .uniqueCombos()
-  .concatCombos(invalidTests)
-  .getCombos();
+
 j
   .clearCombos()
   .clearTemplates();
@@ -119,29 +111,6 @@ var validTests = j
   .useCombosAsTemplates()
   .createCombos(["code"], [{RESULT: "true"}, {RESULT: "false"}])
   .uniqueCombos()
-  .getCombos();
-
-var results = [
-  {RESULT: "'string'"},
-  {RESULT: "'object'"},
-  {RESULT: "'undefined'"},
-  {RESULT: "'symbol'"},
-  {RESULT: "'function'"},
-  {RESULT: "'number'"},
-  {RESULT: "'boolean'"}
-];
-
-validTests = j
-  .setTemplates(invalidTestTemplates)
-  .createCombos(["code"], operators)
-  .uniqueCombos()
-  .useCombosAsTemplates()
-  .createCombos(["code"], {IS_ARRAY: "typeof", MOD: "", FOO: "foo"})
-  .uniqueCombos()
-  .useCombosAsTemplates()
-  .createCombos(["code"], results)
-  .uniqueCombos()
-  .concatCombos(validTests)
   .getCombos()
   .map(function (c) {
     return {code: c.code};
