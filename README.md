@@ -70,7 +70,16 @@ Then configure the rules you want to use under the rules section.
 
 * `no-settimeout` Propose to use `Ember.run.later` instead of `setTimeout`
 * `no-throw` Propose to use `Ember.assert` instead of throwing errors
-* `no-typeof` Propose to use `Ember.typeOf` instead of  built-in `typeof`
+* `no-typeof` Propose to use `Ember.typeOf` instead of  built-in `typeof` for some types check
+
+```
+{
+    "rules: [
+        "ember-cleanup/no-typeof": [2, {disallowed: ["object"]}]
+    ]
+}
+```
+
 * `cp-brace-expansion` Checks dependent keys for possibility to do brace expansion
 
 ## Usage
@@ -88,7 +97,7 @@ Add to your eslint config-file:
     "ember-cleanup/no-dup-keys": [2, {"tryExpandKeys": true}],
     "ember-cleanup/no-settimeout": 2,
     "ember-cleanup/no-throw": 2,
-    "ember-cleanup/no-typeof": 2,
+    "ember-cleanup/no-typeof": [2, {"disallowed": ["object"]}],
     "ember-cleanup/cp-brace-expansion": 2
 }
 ```
