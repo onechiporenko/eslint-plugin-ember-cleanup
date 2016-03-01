@@ -10,7 +10,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require("../../../lib/rules/cp-brace-expansion"),
+var rule = require("../../../lib/rules/no-set-in-getter"),
   RuleTester = require("eslint").RuleTester;
 
 var Jsonium = require("jsonium");
@@ -19,36 +19,42 @@ var j = new Jsonium();
 // Tests
 //------------------------------------------------------------------------------
 
-var m = "Some dependent keys may be grouped with Brace Expansion.";
+var m = "Ember-setter should not be used inside getter.";
 
 var codes = [
-  {CODE: "Ember.computed({{KEYS}}, function () {});"},
-  {CODE: "Ember['computed']({{KEYS}}, function () {});"},
-  {CODE: "Ember.observes({{KEYS}}, function () {});"},
-  {CODE: "Ember['observes']({{KEYS}}, function () {});"},
-  {CODE: "computed({{KEYS}}, function () {});"},
-  {CODE: "observes({{KEYS}}, function () {});"},
-  {CODE: "var a = {b: function() {}.property({{KEYS}})};"},
-  {CODE: "var a = {b: function() {}.observes({{KEYS}})};"}
+  {CODE: "Ember.computed('a', 'b', function () { {{BODY}} });"},
+  {CODE: "Ember['computed']('a', 'b', function () { {{BODY}} });"},
+  {CODE: "computed('a', 'b', function () { {{BODY}} });"},
+  {CODE: "var a = {b: function() { {{BODY}} }.property('a', 'b')};"}
 ];
 
-var validKeysForExpand = [
-  {KEYS: "'a.b','b.c'"},
-  {KEYS: "'a.b','b.c','c.d'"},
-  {KEYS: "'a.b','b.c','e.c.d'"}
+var validBody = [
+  {BODY: "this.set"},
+  {BODY: "Ember.set"},
+  {BODY: "set"}
 ];
 
-var invalidKeysForExpand = [
-  {KEYS: "'a.{b,c}','a.d'"},
-  {KEYS: "'a.b','a.c','a.d'"},
-  {KEYS: "'a.b','b.c','a.d'"},
-  {KEYS: "'b.b','b.c','a.d'"},
-  {KEYS: "'b.b','a.c.b','a.c.d'"},
-  {KEYS: "'a.b','c.b'"},
-  {KEYS: "'a.b','d.c.b'"}
+var invalidBody = [
+  {BODY: "this.set('a', 'b', 'c');"},
+  {BODY: "this.set.call('a', 'b', 'c');"},
+  {BODY: "this['set']('a', 'b', 'c');"},
+  {BODY: "Ember.set('a', 'b', 'c');"},
+  {BODY: "Ember.set.call('a', 'b', 'c');"},
+  {BODY: "Ember['set']('a', 'b', 'c');"},
+  {BODY: "set('a', 'b', 'c');"},
+  {BODY: "set.call('a', 'b', 'c');"}
 ];
 
 var validTestTemplates = [
+  {
+    code: "this.set;"
+  },
+  {
+    code: "Ember.set;"
+  },
+  {
+    code: "set;"
+  },
   {
     code:
       "{{CODE}}"
@@ -78,7 +84,7 @@ var validTestsForExpand = j
   .createCombos(["code"], codes)
   .uniqueCombos()
   .useCombosAsTemplates()
-  .createCombos(["code"], validKeysForExpand)
+  .createCombos(["code"], validBody)
   .getCombos();
 
 j
@@ -90,11 +96,11 @@ var invalidTestsForExpand = j
   .createCombos(["code"], codes)
   .uniqueCombos()
   .useCombosAsTemplates()
-  .createCombos(["code", "errors.@each.message"], invalidKeysForExpand)
+  .createCombos(["code", "errors.@each.message"], invalidBody)
   .getCombos();
 
 var ruleTester = new RuleTester();
-ruleTester.run("cp-brace-expansion", rule, {
+ruleTester.run("no-set-in-getter", rule, {
   valid: validTestsForExpand,
   invalid: invalidTestsForExpand
 });

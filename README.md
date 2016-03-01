@@ -82,6 +82,7 @@ Then configure the rules you want to use under the rules section.
 
 * `cp-brace-expansion` Checks dependent keys for possibility to do brace expansion
 * `no-is-array` Checks for array detection and propose to use `Ember.isArray`
+* `no-set-in-getter` Disallow `Ember.set`, `this.set` inside computed properties getters
 
 ## Usage
 
@@ -100,6 +101,7 @@ Add to your eslint config-file:
     "ember-cleanup/no-throw": 2,
     "ember-cleanup/no-typeof": [2, {"disallowed": ["object"]}],
     "ember-cleanup/cp-brace-expansion": 2,
-    "ember-cleanup/no-is-array": 2
+    "ember-cleanup/no-is-array": 2,
+    "ember-cleanup/no-set-in-getter": 2,
 }
 ```

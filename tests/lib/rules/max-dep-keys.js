@@ -20,7 +20,9 @@ var j = new Jsonium();
 //------------------------------------------------------------------------------
 
 var codes = [
+  {CODE: "Ember['computed']({{KEYS}}, function () {});"},
   {CODE: "Ember.computed({{KEYS}}, function () {});"},
+  {CODE: "Ember['observes']({{KEYS}}, function () {});"},
   {CODE: "Ember.observes({{KEYS}}, function () {});"},
   {CODE: "computed({{KEYS}}, function () {});"},
   {CODE: "observes({{KEYS}}, function () {});"},

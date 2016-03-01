@@ -24,7 +24,9 @@ var m = "Some dependent keys are duplicated.";
 
 var codes = [
   {CODE: "Ember.computed({{KEYS}}, function () {});"},
+  {CODE: "Ember['computed']({{KEYS}}, function () {});"},
   {CODE: "Ember.observes({{KEYS}}, function () {});"},
+  {CODE: "Ember['observes']({{KEYS}}, function () {});"},
   {CODE: "computed({{KEYS}}, function () {});"},
   {CODE: "observes({{KEYS}}, function () {});"},
   {CODE: "var a = {b: function() {}.property({{KEYS}})};"},
