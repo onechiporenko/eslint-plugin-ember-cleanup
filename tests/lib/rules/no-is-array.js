@@ -78,7 +78,7 @@ var invalidTests = j
   .createCombos(["code"], operators)
   .uniqueCombos()
   .useCombosAsTemplates()
-  .createCombos(["code"], [{IS_ARRAY: "Ember.typeOf"}, {IS_ARRAY: "Ember['typeOf']"}, {IS_ARRAY: "Array.isArray"}, {IS_ARRAY: "Array['isArray']"}])
+  .createCombos(["code"], [{IS_ARRAY: "typeOf"}, {IS_ARRAY: "Ember.typeOf"}, {IS_ARRAY: "Ember['typeOf']"}, {IS_ARRAY: "Array.isArray"}, {IS_ARRAY: "Array['isArray']"}])
   .uniqueCombos()
   .useCombosAsTemplates()
   .createCombos(["code"], [{MOD: ".call("}, {MOD: ".apply("}, {MOD: "("}])
