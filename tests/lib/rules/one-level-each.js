@@ -19,24 +19,12 @@ var j = new Jsonium();
 var m1 = "Dependent key should not end with `@each`, use `[]` instead.";
 var m2 = "Multiple `@each` in the one dependent key are not allowed.";
 var m3 = "Deep `@each` in the dependent key is not allowed.";
-
+var keys = require("./keys.js");
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-var codes = [
-  {CODE: "Ember.computed({{KEYS}}, function () {});"},
-  {CODE: "Ember.computed({{KEYS}}, {get() {}, set() {}});"},
-  {CODE: "Ember['computed']({{KEYS}}, function () {});"},
-  {CODE: "Ember['computed']({{KEYS}}, {get() {}, set() {}});"},
-  {CODE: "Ember.observes({{KEYS}}, function () {});"},
-  {CODE: "Ember['observes']({{KEYS}}, function () {});"},
-  {CODE: "computed({{KEYS}}, function () {});"},
-  {CODE: "computed({{KEYS}}, {get() {}, set() {}});"},
-  {CODE: "observes({{KEYS}}, function () {});"},
-  {CODE: "var a = {b: function() {}.property({{KEYS}})};"},
-  {CODE: "var a = {b: function() {}.observes({{KEYS}})};"}
-];
+var codes = keys.code;
 
 var validKeys = [
   {KEYS: "'a.@each.b'"},

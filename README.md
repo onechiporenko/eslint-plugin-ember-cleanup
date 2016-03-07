@@ -86,6 +86,7 @@ Then configure the rules you want to use under the rules section.
 * `no-this-in-dep-keys` Check for dependent keys that starts with `this.`
 * `one-level-each` Check for dependent keys with invalid `@each` usage
 * `no-multi-dots` Check for dependent keys that contains `..`
+* `no-typo-in-dep-keys` Rule to check possible typos in the dependent keys (it doesn't check short keys) **IMPORTANT** This rule is experimental and may do false alarms
 
 ## Usage
 
@@ -109,5 +110,6 @@ Add to your eslint config-file:
     "ember-cleanup/no-this-in-dep-keys": 2,
     "ember-cleanup/one-level-each": 2,
     "ember-cleanup/no-multi-dots": 1,
+    "ember-cleanup/no-typo-in-dep-keys": 1,
 }
 ```
