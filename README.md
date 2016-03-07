@@ -83,6 +83,9 @@ Then configure the rules you want to use under the rules section.
 * `cp-brace-expansion` Checks dependent keys for possibility to do brace expansion
 * `no-is-array` Checks for array detection and propose to use `Ember.isArray`
 * `no-set-in-getter` Disallow `Ember.set`, `this.set` inside computed properties getters
+* `no-this-in-dep-keys` Check for dependent keys that starts with `this.`
+* `one-level-each` Check for dependent keys with invalid `@each` usage
+* `no-multi-dots` Check for dependent keys that contains `..`
 
 ## Usage
 
@@ -103,5 +106,8 @@ Add to your eslint config-file:
     "ember-cleanup/cp-brace-expansion": 2,
     "ember-cleanup/no-is-array": 2,
     "ember-cleanup/no-set-in-getter": 2,
+    "ember-cleanup/no-this-in-dep-keys": 2,
+    "ember-cleanup/one-level-each": 2,
+    "ember-cleanup/no-multi-dots": 1,
 }
 ```
