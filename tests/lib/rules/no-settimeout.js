@@ -18,7 +18,7 @@ var j = new Jsonium();
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
-var m = "`Ember.run.later` should be used.";
+var m = "`Ember.run.{{M}}` should be used.";
 
 var validTests = [
   {code: "Ember.run.later(obj, function () {}, 1000);"},
@@ -36,21 +36,26 @@ var validTests = [
 ];
 
 var invalidCodes = [
-  {CODE: "setTimeout();"},
-  {CODE: "setTimeout.call();"},
-  {CODE: "setTimeout.apply();"},
-  {CODE: "window.setTimeout();"},
-  {CODE: "window.setTimeout.call();"},
-  {CODE: "window.setTimeout.apply();"},
-  {CODE: "window['setTimeout']();"},
-  {CODE: "window['setTimeout'].call();"},
-  {CODE: "window['setTimeout'].apply();"},
-  {CODE: "setTimeout(function () {}, 1000);"},
-  {CODE: "setTimeout.call(function () {}, 1000);"},
-  {CODE: "setTimeout.apply(function () {}, 1000);"},
-  {CODE: "window['setTimeout'](function () {}, 1000);"},
-  {CODE: "window['setTimeout'].call(function () {}, 1000);"},
-  {CODE: "window['setTimeout'].apply(function () {}, 1000);"}
+  {CODE: "setTimeout(function() {}, {{TIME}});"},
+  {CODE: "setTimeout.call({}, function() {}, {{TIME}});"},
+  {CODE: "setTimeout.apply({}, function() {}, {{TIME}});"},
+  {CODE: "window.setTimeout(function() {}, {{TIME}});"},
+  {CODE: "window.setTimeout.call({}, function() {}, {{TIME}});"},
+  {CODE: "window.setTimeout.apply({}, function() {}, {{TIME}});"},
+  {CODE: "window['setTimeout'](function() {}, {{TIME}});"},
+  {CODE: "window['setTimeout'].call(function() {}, {{TIME}});"},
+  {CODE: "window['setTimeout'].apply(function() {}, {{TIME}});"},
+  {CODE: "setTimeout(function () {}, {{TIME}});"},
+  {CODE: "setTimeout.call(function () {}, {{TIME}});"},
+  {CODE: "setTimeout.apply(function () {}, {{TIME}});"},
+  {CODE: "window['setTimeout'](function () {}, {{TIME}});"},
+  {CODE: "window['setTimeout'].call(function () {}, {{TIME}});"},
+  {CODE: "window['setTimeout'].apply(function () {}, {{TIME}});"}
+];
+
+var timeouts = [
+  {TIME: 1, M: "next"},
+  {TIME: 1000, M: "later"}
 ];
 
 var invalidTestsTemplates = [
@@ -74,6 +79,8 @@ var invalidTestsTemplates = [
 var invalidTests = j
   .setTemplates(invalidTestsTemplates)
   .createCombos(["code"], invalidCodes)
+  .useCombosAsTemplates()
+  .createCombos(["code", "errors.@each.message"], timeouts)
   .uniqueCombos()
   .getCombos();
 
