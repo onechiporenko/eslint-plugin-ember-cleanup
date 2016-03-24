@@ -23,9 +23,13 @@ var m = "Ember-setter should not be used inside getter.";
 
 var codes = [
   {CODE: "Ember.computed('a', 'b', function () { {{BODY}} });"},
+  {CODE: "Em.computed('a', 'b', function () { {{BODY}} });"},
   {CODE: "Ember.computed('a', 'b', { get() {{{BODY}}}, set() {} });"},
+  {CODE: "Em.computed('a', 'b', { get() {{{BODY}}}, set() {} });"},
   {CODE: "Ember['computed']('a', 'b', function () { {{BODY}} });"},
+  {CODE: "Em['computed']('a', 'b', function () { {{BODY}} });"},
   {CODE: "Ember['computed']('a', 'b', { get() {{{BODY}}}, set() {} });"},
+  {CODE: "Em['computed']('a', 'b', { get() {{{BODY}}}, set() {} });"},
   {CODE: "computed('a', 'b', function () { {{BODY}} });"},
   {CODE: "computed('a', 'b', { get() {{{BODY}}}, set() {} });"},
   {CODE: "var a = {b: function() { {{BODY}} }.property('a', 'b')};"}

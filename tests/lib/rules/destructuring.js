@@ -14,8 +14,11 @@ var rule = require("../../../lib/rules/destructuring"),
   RuleTester = require("eslint").RuleTester;
 
 var emberUsages = [
+  {EMBER_USAGE1: "Em.get({}, 'a');", EMBER_USAGE2: "Em.set({}, 'a', 1);", IN_MESSAGE1: "Ember.get", IN_MESSAGE2: "Ember.set"},
   {EMBER_USAGE1: "Ember.get({}, 'a');", EMBER_USAGE2: "Ember.set({}, 'a', 1);", IN_MESSAGE1: "Ember.get", IN_MESSAGE2: "Ember.set"},
+  {EMBER_USAGE1: "Em.assert('', false);", EMBER_USAGE2: "Em.run(function () {});", IN_MESSAGE1: "Ember.assert", IN_MESSAGE2: "Ember.run"},
   {EMBER_USAGE1: "Ember.assert('', false);", EMBER_USAGE2: "Ember.run(function () {});", IN_MESSAGE1: "Ember.assert", IN_MESSAGE2: "Ember.run"},
+  {EMBER_USAGE1: "Em.Object.create({});", EMBER_USAGE2: "Em.tryInvoke(this, 'fName');", IN_MESSAGE1: "Ember.Object", IN_MESSAGE2: "Ember.tryInvoke"},
   {EMBER_USAGE1: "Ember.Object.create({});", EMBER_USAGE2: "Ember.tryInvoke(this, 'fName');", IN_MESSAGE1: "Ember.Object", IN_MESSAGE2: "Ember.tryInvoke"}
 ];
 
