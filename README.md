@@ -84,9 +84,11 @@ Then configure the rules you want to use under the rules section.
 * `no-is-array` Checks for array detection and propose to use `Ember.isArray`
 * `no-set-in-getter` Disallow `Ember.set`, `this.set` inside computed properties getters
 * `no-this-in-dep-keys` Check for dependent keys that starts with `this.`
-* `one-level-each` Check for dependent keys with invalid `@each` usage
-* `no-multi-dots` Check for dependent keys that contains `..`
+* `one-level-each` Checks for dependent keys with invalid `@each` usage
+* `no-multi-dots` Checks for dependent keys that contains `..`
 * `no-typo-in-dep-keys` Rule to check possible typos in the dependent keys (it doesn't check short keys) **IMPORTANT** This rule is experimental and may do false alarms
+* `cp-macro-args-limit` Checks number of the dependent keys for computed macros
+* `cp-macro-not-key` Checks arguments for computed macros to not be dependent keys
 
 ## Usage
 
@@ -111,5 +113,14 @@ Add to your eslint config-file:
     "ember-cleanup/one-level-each": 2,
     "ember-cleanup/no-multi-dots": 1,
     "ember-cleanup/no-typo-in-dep-keys": 1,
+    "ember-cleanup/cp-macro-args-limit": [2, {"check": ["and", "or"]}],
+    "ember-cleanup/cp-macro-not-key": [2, {"check": {
+      "equal": [1],
+      "filterBy": [2],
+      "gt": [1],
+      "gte": [1],
+      "lt": [1],
+      "lte": [1]
+    }}]
 }
 ```

@@ -22,5 +22,14 @@ module.exports = {
     {CODE: "observes({{KEYS}}, function () {});"},
     {CODE: "var a = {b: function() {}.property({{KEYS}})};"},
     {CODE: "var a = {b: function() {}.observes({{KEYS}})};"}
+  ],
+
+  macro: [
+    {CODE: "computed.{{MACRO}}({{KEYS}});"},
+    {CODE: "Em.computed.{{MACRO}}({{KEYS}});"},
+    {CODE: "Em['computed'].{{MACRO}}({{KEYS}});"},
+    {CODE: "Em['computed']['{{MACRO}}']({{KEYS}});"},
+    {CODE: "Ember['computed'].{{MACRO}}({{KEYS}});"},
+    {CODE: "Ember['computed']['{{MACRO}}']({{KEYS}});"}
   ]
 };

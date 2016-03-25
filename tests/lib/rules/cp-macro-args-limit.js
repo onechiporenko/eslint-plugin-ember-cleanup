@@ -28,14 +28,7 @@ var macros = [
 
 var customMacro = [{MACRO: "customMacro"}];
 
-var codes = [
-  {CODE: "computed.{{MACRO}}({{KEYS}});"},
-  {CODE: "Em.computed.{{MACRO}}({{KEYS}});"},
-  {CODE: "Em['computed'].{{MACRO}}({{KEYS}});"},
-  {CODE: "Em['computed']['{{MACRO}}']({{KEYS}});"},
-  {CODE: "Ember['computed'].{{MACRO}}({{KEYS}});"},
-  {CODE: "Ember['computed']['{{MACRO}}']({{KEYS}});"}
-];
+var codes = require("./keys.js").macro;
 
 var validKeys = [
   {KEYS: "'a', 'b', 'c'", MIN: 2},
