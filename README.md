@@ -89,6 +89,7 @@ Then configure the rules you want to use under the rules section.
 * `no-typo-in-dep-keys` Rule to check possible typos in the dependent keys (it doesn't check short keys) **IMPORTANT** This rule is experimental and may do false alarms
 * `cp-macro-args-limit` Checks number of the dependent keys for computed macros
 * `cp-macro-not-key` Checks arguments for computed macros to not be dependent keys
+* `no-expr-in-dep-keys` Checks for expressions in the dependent keys
 
 ## Usage
 
@@ -121,6 +122,7 @@ Add to your eslint config-file:
       "gte": [1],
       "lt": [1],
       "lte": [1]
-    }}]
+    }}],
+    "ember-cleanup/no-expr-in-dep-keys": 2
 }
 ```
