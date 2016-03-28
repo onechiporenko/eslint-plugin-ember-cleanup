@@ -28,8 +28,14 @@ var validKeys = [
   {KEYS: "'myObject.myProperty', 'myProperti.myObkect'"}
 ];
 
+var keysWithExclamationMark = [
+  {KEYS: "'myObject', '!myObject'"},
+  {KEYS: "'myObject.myProperty', '!myObject.myProperty'"}
+];
+
 var invalidKeys = [
   {KEYS: "'myObject.a', 'myObject.b', 'myObkect.c'", M1: "myObkect", M2: "myObject"},
+  {KEYS: "'myObject', '!myObject'", M1: "myObject", M2: "!myObject"},
   {KEYS: "'myObject.myProperty.val1', 'myObject.myProeprty.val2', 'myObject.myProperty.val3'", M1: "myProeprty", M2: "myProperty"}
 ];
 
@@ -37,6 +43,16 @@ var validTestTemplates = [
   {
     code:
       "{{CODE}}"
+  }
+];
+
+var validTestTemplatesForIgnoreExclamationMark = [
+  {
+    code:
+      "{{CODE}}",
+    options: [
+      {ignoreExclamationMark: true}
+    ]
   }
 ];
 
@@ -56,6 +72,15 @@ var validTests = j
   .useCombosAsTemplates()
   .createCombos(["code"], validKeys)
   .uniqueCombos()
+  .getCombos();
+
+validTests = j
+  .setTemplates(validTestTemplatesForIgnoreExclamationMark)
+  .createCombos(["code"], codes)
+  .useCombosAsTemplates()
+  .createCombos(["code"], keysWithExclamationMark)
+  .uniqueCombos()
+  .concatCombos(validTests)
   .getCombos();
 
 var invalidTests = j

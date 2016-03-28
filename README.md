@@ -47,7 +47,7 @@ Then configure the rules you want to use under the rules section.
 ## Supported Rules
 
 * `destructuring` Looks for usage `Ember.*` many times and propose to replace it with `const {} = Ember;` 
-* `max-dep-keys` Checks number of dependent keys for observers and computed properties. May be customized with `max` - maximum number of dependent keys (default `3`), `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
+* `max-dep-keys` Checks number of dependent keys for observers and computed properties. Rule may be customized with `max` - maximum number of dependent keys (default `3`), `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
 
 ```
 {
@@ -58,7 +58,7 @@ Then configure the rules you want to use under the rules section.
 ```
 
 * `no-console` Propose to use `Ember.Logger` instead of `console`
-* `no-dup-keys` Checks for duplicated dependent keys for observers and computed properties. May be customized with `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
+* `no-dup-keys` Checks for duplicated dependent keys for observers and computed properties. Rule may be customized with `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
 
 ```
 {
@@ -86,7 +86,7 @@ Then configure the rules you want to use under the rules section.
 * `no-this-in-dep-keys` Check for dependent keys that starts with `this.`
 * `one-level-each` Checks for dependent keys with invalid `@each` usage
 * `no-multi-dots` Checks for dependent keys that contains `..`
-* `no-typo-in-dep-keys` Rule to check possible typos in the dependent keys (it doesn't check short keys) **IMPORTANT** This rule is experimental and may do false alarms
+* `no-typo-in-dep-keys` Rule to check possible typos in the dependent keys (it doesn't check short keys). Rule may be customized with `ignoreExclamationMark` - should keys like `!abc` and `abc` be processed as equal (`false` by default). **IMPORTANT** This rule is experimental and may do false alarms
 * `cp-macro-args-limit` Checks number of the dependent keys for computed macros
 * `cp-macro-not-key` Checks arguments for computed macros to not be dependent keys
 * `no-expr-in-dep-keys` Checks for expressions in the dependent keys
@@ -113,7 +113,9 @@ Add to your eslint config-file:
     "ember-cleanup/no-this-in-dep-keys": 2,
     "ember-cleanup/one-level-each": 2,
     "ember-cleanup/no-multi-dots": 1,
-    "ember-cleanup/no-typo-in-dep-keys": 1,
+    "ember-cleanup/no-typo-in-dep-keys": [1, {
+      "ignoreExclamationMark": true
+    }],
     "ember-cleanup/cp-macro-args-limit": [2, {
       "and": {"min": 2},
       "or": {"min": 2},
