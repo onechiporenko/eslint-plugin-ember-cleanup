@@ -114,15 +114,20 @@ Add to your eslint config-file:
     "ember-cleanup/one-level-each": 2,
     "ember-cleanup/no-multi-dots": 1,
     "ember-cleanup/no-typo-in-dep-keys": 1,
-    "ember-cleanup/cp-macro-args-limit": [2, {"check": ["and", "or"]}],
-    "ember-cleanup/cp-macro-not-key": [2, {"check": {
+    "ember-cleanup/cp-macro-args-limit": [2, {
+      "and": {"min": 2},
+      "or": {"min": 2},
+      "max": {"eq": 1},
+      "min": {"eq": 1}
+    }],
+    "ember-cleanup/cp-macro-not-key": [2, {
       "equal": [1],
       "filterBy": [2],
       "gt": [1],
       "gte": [1],
       "lt": [1],
       "lte": [1]
-    }}],
+    }],
     "ember-cleanup/no-expr-in-dep-keys": 2
 }
 ```

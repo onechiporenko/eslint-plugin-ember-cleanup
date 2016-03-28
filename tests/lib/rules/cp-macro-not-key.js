@@ -23,10 +23,8 @@ var m = "{{NUM1}} argument for `computed.{{MACRO}}` should be raw-value and not 
 var m2 = "{{NUM2}} argument for `computed.{{MACRO}}` should be raw-value and not a dependent key";
 
 var options = [{
-  check: {
-    gt: [1],
-    myMacro: [1, 2]
-  }
+  gt: [1],
+  myMacro: [1, 2]
 }];
 
 var macros = [
@@ -65,7 +63,7 @@ var uniqueValidTests = [
       "Em.Object.extend({ b: '' }); " +
       "Em.Object.extend({ key : computed.gt('a', 'b') });",
     options: [
-      {check: {gt: [1]}}
+      {gt: [1]}
     ]
   }
 ];
@@ -109,6 +107,7 @@ var validTests = j
   .useCombosAsTemplates()
   .createCombos(["code"], validKeys)
   .uniqueCombos()
+  .concatCombos(uniqueValidTests)
   .getCombos();
 
 var invalidTests = j
