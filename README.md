@@ -116,20 +116,20 @@ Add to your eslint config-file:
     "ember-cleanup/no-typo-in-dep-keys": [1, {
       "ignoreExclamationMark": true
     }],
-    "ember-cleanup/cp-macro-args-limit": [2, {
+    "ember-cleanup/cp-macro-args-limit": [2, "check": {
       "and": {"min": 2},
       "or": {"min": 2},
       "max": {"eq": 1},
       "min": {"eq": 1}
-    }],
-    "ember-cleanup/cp-macro-not-key": [2, {
+    }}],
+    "ember-cleanup/cp-macro-not-key": [2, {"check": {
       "equal": [1],
       "filterBy": [2],
       "gt": [1],
       "gte": [1],
       "lt": [1],
       "lte": [1]
-    }],
+    }}],
     "ember-cleanup/no-expr-in-dep-keys": 2
 }
 ```
