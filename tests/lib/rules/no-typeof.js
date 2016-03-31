@@ -41,7 +41,7 @@ var invalidTestTemplates = [
   {
     code:
       "{{TYPEOF}} {{FOO}} {{OPERATOR}} '{{TYPE}}';",
-    options: [{disallowed: ['{{TYPE}}']}],
+    options: [{disallowed: ["{{TYPE}}"]}],
     errors: [
       {message: m}
     ]
@@ -49,7 +49,7 @@ var invalidTestTemplates = [
   {
     code:
       "'{{TYPE}}' {{OPERATOR}} {{TYPEOF}} {{FOO}};",
-    options: [{disallowed: ['{{TYPE}}']}],
+    options: [{disallowed: ["{{TYPE}}"]}],
     errors: [
       {message: m}
     ]
@@ -57,7 +57,7 @@ var invalidTestTemplates = [
   {
     code:
       "if ({{TYPEOF}} {{FOO}} {{OPERATOR}} '{{TYPE}}') {}",
-    options: [{disallowed: ['{{TYPE}}']}],
+    options: [{disallowed: ["{{TYPE}}"]}],
     errors: [
       {message: m}
     ]
@@ -65,7 +65,7 @@ var invalidTestTemplates = [
   {
     code:
       "if ('{{TYPE}}' {{OPERATOR}} {{TYPEOF}} {{FOO}}) {}",
-    options: [{disallowed: ['{{TYPE}}']}],
+    options: [{disallowed: ["{{TYPE}}"]}],
     errors: [
       {message: m}
     ]
@@ -73,7 +73,7 @@ var invalidTestTemplates = [
   {
     code:
       "var val = {{TYPEOF}} {{FOO}} {{OPERATOR}} '{{TYPE}}';",
-    options: [{disallowed: ['{{TYPE}}']}],
+    options: [{disallowed: ["{{TYPE}}"]}],
     errors: [
       {message: m}
     ]
@@ -81,7 +81,7 @@ var invalidTestTemplates = [
   {
     code:
       "var val = '{{TYPE}}' {{OPERATOR}} {{TYPEOF}} {{FOO}};",
-    options: [{disallowed: ['{{TYPE}}']}],
+    options: [{disallowed: ["{{TYPE}}"]}],
     errors: [
       {message: m}
     ]
