@@ -25,7 +25,10 @@ module.exports = {
   ],
 
   macro: [
+    {CODE: "{{MACRO}}({{KEYS}});"},
     {CODE: "computed.{{MACRO}}({{KEYS}});"},
+    {CODE: "myNamespace.{{MACRO}}({{KEYS}});"},
+    {CODE: "space.subSpace.{{MACRO}}({{KEYS}});"},
     {CODE: "Em.computed.{{MACRO}}({{KEYS}});"},
     {CODE: "Em['computed'].{{MACRO}}({{KEYS}});"},
     {CODE: "Em['computed']['{{MACRO}}']({{KEYS}});"},

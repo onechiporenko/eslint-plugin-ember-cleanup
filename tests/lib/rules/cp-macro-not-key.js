@@ -19,12 +19,15 @@ var j = new Jsonium();
 // Tests
 //------------------------------------------------------------------------------
 
-var m = "{{NUM1}} argument for `computed.{{MACRO}}` should be raw-value and not a dependent key";
-var m2 = "{{NUM2}} argument for `computed.{{MACRO}}` should be raw-value and not a dependent key";
+var m = "{{NUM1}} argument for `{{MACRO}}` should be raw-value and not a dependent key";
+var m2 = "{{NUM2}} argument for `{{MACRO}}` should be raw-value and not a dependent key";
 
 var options = [{
-  gt: [1],
-  myMacro: [1, 2]
+  namespaces: ["myNamespace", "space.subSpace"],
+  check: {
+    gt: [1],
+    myMacro: [1, 2]
+  }
 }];
 
 var macros = [
@@ -63,7 +66,19 @@ var uniqueValidTests = [
       "Em.Object.extend({ b: '' }); " +
       "Em.Object.extend({ key : computed.gt('a', 'b') });",
     options: [
-      {gt: [1]}
+      {check: {gt: [1]}}
+    ]
+  },
+  {
+    code:
+      "Em.Object.extend({ b: '', key: space.macro('a', 'b') });",
+    options: [
+      {
+        check: {
+          macro: [1]
+        },
+        namespaces: ["space2"]
+      }
     ]
   }
 ];
@@ -95,6 +110,39 @@ var invalidTestTemplates2 = [
     errors: [
       {message: m, type: "CallExpression"},
       {message: m2, type: "CallExpression"}
+    ]
+  }
+];
+
+var uniqueInvalidTests = [
+  {
+    code:
+      "Em.Object.extend({ b: '', key: macro('a', 'b') });",
+    options: [
+      {
+        check: {
+          macro: [1]
+        },
+        namespaces: ["space"]
+      }
+    ],
+    errors: [
+      {message: "2nd argument for `macro` should be raw-value and not a dependent key", type: "CallExpression"}
+    ]
+  },
+  {
+    code:
+      "Em.Object.extend({ b: '', key: space.macro('a', 'b'), key2: space2.macro('a', 'b', 'c') });",
+    options: [
+      {
+        check: {
+          "space2.macro": [2],
+          "space.macro": [1]
+        }
+      }
+    ],
+    errors: [
+      {message: "2nd argument for `space.macro` should be raw-value and not a dependent key", type: "CallExpression"}
     ]
   }
 ];
@@ -133,5 +181,5 @@ var invalidTests2 = j
 var ruleTester = new RuleTester({env: {es6: true}});
 ruleTester.run("cp-macro-not-key", rule, {
   valid: validTests,
-  invalid: invalidTests.concat(invalidTests2)
+  invalid: invalidTests.concat(invalidTests2).concat(uniqueInvalidTests)
 });

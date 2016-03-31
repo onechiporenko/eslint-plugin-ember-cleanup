@@ -19,6 +19,17 @@ var j = new Jsonium();
 // Tests
 //------------------------------------------------------------------------------
 
+function parseCount(test) {
+  Object.keys(test.options[0].check).forEach(function (k) {
+    ["min", "max", "eq"].forEach(function (p) {
+      if (test.options[0].check[k].hasOwnProperty(p)) {
+        test.options[0].check[k][p] = parseInt(test.options[0].check[k][p], 10);
+      }
+    });
+  });
+  return test;
+}
+
 var mAtLeast = "`computed.{{MACRO}}` is called with {{NUM}} dependent key(s). Must be at least {{MIN}} dependent key(s)";
 var mAtMost = "`computed.{{MACRO}}` is called with {{NUM}} dependent key(s). Must be at most {{MAX}} dependent key(s)";
 var mEq = "`computed.{{MACRO}}` is called with {{NUM}} dependent key(s). Must be only {{EQ}} dependent key(s)";
@@ -30,7 +41,11 @@ var macrosForMin = [
 
 var customMacro = [{MACRO: "customMacro"}];
 
-var codes = require("./keys.js").macro;
+var codes = require("./keys.js").macro.map(function (c) {
+  var _c = JSON.parse(JSON.stringify(c));
+  _c.CODE = _c.CODE.replace(";", "");
+  return _c;
+});
 
 var validKeysForMin = [
   {KEYS: "'a', 'b', 'c'", MIN: 2},
@@ -47,24 +62,28 @@ var invalidKeysForMin = [
 
 var validTestTemplatesForMin = [
   {
-    code:
-      "{{CODE}}",
+    code: "Em.Object.extend({ key : {{CODE}} });",
     options: [{
-      customMacro: {min: "{{MIN}}"},
-      and: {min: "{{MIN}}"},
-      or: {min: "{{MIN}}"}
+      namespaces: ["myNamespace", "space.subSpace"],
+      check: {
+        customMacro: {min: "{{MIN}}"},
+        and: {min: "{{MIN}}"},
+        or: {min: "{{MIN}}"}
+      }
     }]
   }
 ];
 
 var invalidTestTemplatesForMin = [
   {
-    code:
-      "{{CODE}}",
+    code: "Em.Object.extend({ key : {{CODE}} });",
     options: [{
-      customMacro: {min: "{{MIN}}"},
-      and: {min: "{{MIN}}"},
-      or: {min: "{{MIN}}"}
+      namespaces: ["myNamespace", "space.subSpace"],
+      check: {
+        customMacro: {min: "{{MIN}}"},
+        and: {min: "{{MIN}}"},
+        or: {min: "{{MIN}}"}
+      }
     }],
     errors: [
       {message: mAtLeast, type: "CallExpression"}
@@ -72,25 +91,13 @@ var invalidTestTemplatesForMin = [
   }
 ];
 
-
-function parseCount(test) {
-  Object.keys(test.options[0]).forEach(function (k) {
-    ["min", "max", "eq"].forEach(function (p) {
-      if (test.options[0][k].hasOwnProperty(p)) {
-        test.options[0][k][p] = parseInt(test.options[0][k][p], 10);
-      }
-    });
-  });
-  return test;
-}
-
 var validTests = j
   .setTemplates(validTestTemplatesForMin)
   .createCombos(["code"], codes)
   .useCombosAsTemplates()
   .createCombos(["code"], macrosForMin)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{and,or}.min"], validKeysForMin)
+  .createCombos(["code", "options.0.check.{and,or}.min"], validKeysForMin)
   .uniqueCombos()
   .getCombos();
 
@@ -100,7 +107,7 @@ var customValidTests = j
   .useCombosAsTemplates()
   .createCombos(["code"], customMacro)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{and,or,customMacro}.min"], validKeysForMin)
+  .createCombos(["code", "options.0.check.{and,or,customMacro}.min"], validKeysForMin)
   .uniqueCombos()
   .getCombos();
 
@@ -112,7 +119,7 @@ var invalidTests = j
   .useCombosAsTemplates()
   .createCombos(["code", "errors.0.message"], macrosForMin)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{and,or}.min", "errors.0.message"], invalidKeysForMin)
+  .createCombos(["code", "options.0.check.{and,or}.min", "errors.0.message"], invalidKeysForMin)
   .uniqueCombos()
   .getCombos();
 
@@ -122,7 +129,7 @@ var customInvalidTests = j
   .useCombosAsTemplates()
   .createCombos(["code", "errors.0.message"], customMacro)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{and,or,customMacro}.min", "errors.0.message"], invalidKeysForMin)
+  .createCombos(["code", "options.0.check.{and,or,customMacro}.min", "errors.0.message"], invalidKeysForMin)
   .uniqueCombos()
   .getCombos();
 
@@ -143,24 +150,28 @@ var macrosForEq = [
 
 var validTestTemplatesForEq = [
   {
-    code:
-      "{{CODE}}",
+    code: "Em.Object.extend({ key : {{CODE}} });",
     options: [{
-      customMacro: {eq: "{{EQ}}"},
-      min: {eq: "{{EQ}}"},
-      max: {eq: "{{EQ}}"}
+      namespaces: ["myNamespace", "space.subSpace"],
+      check: {
+        customMacro: {eq: "{{EQ}}"},
+        min: {eq: "{{EQ}}"},
+        max: {eq: "{{EQ}}"}
+      }
     }]
   }
 ];
 
 var invalidTestTemplatesForEq = [
   {
-    code:
-      "{{CODE}}",
+    code: "Em.Object.extend({ key : {{CODE}} });",
     options: [{
-      customMacro: {eq: "{{EQ}}"},
-      min: {eq: "{{EQ}}"},
-      max: {eq: "{{EQ}}"}
+      namespaces: ["myNamespace", "space.subSpace"],
+      check: {
+        customMacro: {eq: "{{EQ}}"},
+        min: {eq: "{{EQ}}"},
+        max: {eq: "{{EQ}}"}
+      }
     }],
     errors: [
       {message: mEq, type: "CallExpression"}
@@ -189,7 +200,7 @@ validTests = j
   .useCombosAsTemplates()
   .createCombos(["code"], macrosForEq)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{max,min}.eq"], validKeysForEq)
+  .createCombos(["code", "options.0.check.{max,min}.eq"], validKeysForEq)
   .uniqueCombos()
   .getCombos();
 
@@ -199,7 +210,7 @@ customValidTests = j
   .useCombosAsTemplates()
   .createCombos(["code"], customMacro)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{max,min,customMacro}.eq"], validKeysForEq)
+  .createCombos(["code", "options.0.check.{max,min,customMacro}.eq"], validKeysForEq)
   .uniqueCombos()
   .getCombos();
 
@@ -211,7 +222,7 @@ invalidTests = j
   .useCombosAsTemplates()
   .createCombos(["code", "errors.0.message"], macrosForEq)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{max,min}.eq", "errors.0.message"], invalidKeysForEq)
+  .createCombos(["code", "options.0.check.{max,min}.eq", "errors.0.message"], invalidKeysForEq)
   .uniqueCombos()
   .getCombos();
 
@@ -221,7 +232,7 @@ customInvalidTests = j
   .useCombosAsTemplates()
   .createCombos(["code", "errors.0.message"], customMacro)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{max,min,customMacro}.eq", "errors.0.message"], invalidKeysForEq)
+  .createCombos(["code", "options.0.check.{max,min,customMacro}.eq", "errors.0.message"], invalidKeysForEq)
   .uniqueCombos()
   .getCombos();
 
@@ -241,22 +252,26 @@ var macrosForMax = [
 
 var validTestTemplatesForMax = [
   {
-    code:
-      "{{CODE}}",
+    code: "Em.Object.extend({ key : {{CODE}} });",
     options: [{
-      superMacro1: {max: "{{MAX}}"},
-      superMacro2: {max: "{{MAX}}"}
+      namespaces: ["myNamespace", "space.subSpace"],
+      check: {
+        superMacro1: {max: "{{MAX}}"},
+        superMacro2: {max: "{{MAX}}"}
+      }
     }]
   }
 ];
 
 var invalidTestTemplatesForMax = [
   {
-    code:
-      "{{CODE}}",
+    code: "Em.Object.extend({ key : {{CODE}} });",
     options: [{
-      superMacro1: {max: "{{MAX}}"},
-      superMacro2: {max: "{{MAX}}"}
+      namespaces: ["myNamespace", "space.subSpace"],
+      check: {
+        superMacro1: {max: "{{MAX}}"},
+        superMacro2: {max: "{{MAX}}"}
+      }
     }],
     errors: [
       {message: mAtMost, type: "CallExpression"}
@@ -285,7 +300,7 @@ validTests = j
   .useCombosAsTemplates()
   .createCombos(["code"], macrosForEq)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{superMacro1,superMacro2}.max"], validKeysForMax)
+  .createCombos(["code", "options.0.check.{superMacro1,superMacro2}.max"], validKeysForMax)
   .uniqueCombos()
   .getCombos();
 
@@ -297,7 +312,7 @@ invalidTests = j
   .useCombosAsTemplates()
   .createCombos(["code", "errors.0.message"], macrosForMax)
   .useCombosAsTemplates()
-  .createCombos(["code", "options.0.{superMacro1,superMacro2}.max", "errors.0.message"], invalidKeysForMax)
+  .createCombos(["code", "options.0.check.{superMacro1,superMacro2}.max", "errors.0.message"], invalidKeysForMax)
   .uniqueCombos()
   .getCombos();
 
