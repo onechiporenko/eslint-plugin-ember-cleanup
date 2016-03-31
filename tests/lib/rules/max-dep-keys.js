@@ -20,7 +20,9 @@ var keys = require("./keys.js");
 // Tests
 //------------------------------------------------------------------------------
 
-var codes = keys.code;
+var codes = keys.code.slice().filter(function (c) {
+  return c.CODE.indexOf(".someMacro") === -1;
+});
 
 var validKeys = [
   {KEYS: "'a'", MAX: 1, EXP: ""},
