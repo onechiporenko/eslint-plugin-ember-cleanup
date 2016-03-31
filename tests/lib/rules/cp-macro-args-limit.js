@@ -30,9 +30,9 @@ function parseCount(test) {
   return test;
 }
 
-var mAtLeast = "`computed.{{MACRO}}` is called with {{NUM}} dependent key(s). Must be at least {{MIN}} dependent key(s)";
-var mAtMost = "`computed.{{MACRO}}` is called with {{NUM}} dependent key(s). Must be at most {{MAX}} dependent key(s)";
-var mEq = "`computed.{{MACRO}}` is called with {{NUM}} dependent key(s). Must be only {{EQ}} dependent key(s)";
+var mAtLeast = "`{{MACRO}}` is called with {{NUM}} dependent key(s). Must be at least {{MIN}} dependent key(s)";
+var mAtMost = "`{{MACRO}}` is called with {{NUM}} dependent key(s). Must be at most {{MAX}} dependent key(s)";
+var mEq = "`{{MACRO}}` is called with {{NUM}} dependent key(s). Must be only {{EQ}} dependent key(s)";
 
 var macrosForMin = [
   {MACRO: "and"},
