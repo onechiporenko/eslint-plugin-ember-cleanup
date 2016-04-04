@@ -116,7 +116,7 @@ Add to your eslint config-file:
     "ember-cleanup/no-typo-in-dep-keys": [1, {
       "ignoreExclamationMark": true
     }],
-    "ember-cleanup/cp-macro-args-limit": [2, "check": {
+    "ember-cleanup/cp-macro-args-limit": [2, {"check": {
       "and": {"min": 2},
       "or": {"min": 2},
       "max": {"eq": 1},
