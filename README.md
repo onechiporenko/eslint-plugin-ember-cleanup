@@ -90,7 +90,7 @@ Then configure the rules you want to use under the rules section.
 * `cp-macro-args-limit` Checks number of the dependent keys for computed macros
 * `cp-macro-not-key` Checks arguments for computed macros to not be dependent keys
 * `no-expr-in-dep-keys` Checks for expressions in the dependent keys
-* `no-push-object-in-loop` Rule to disallow use `pushObject(s)` inside loops
+* `no-push-object-in-loop` Rule to disallow use `pushObject(s)` inside loops (for very old Ember versions)
 
 ## Usage
 
