@@ -90,7 +90,16 @@ Then configure the rules you want to use under the rules section.
 * `cp-macro-args-limit` Checks number of the dependent keys for computed macros
 * `cp-macro-not-key` Checks arguments for computed macros to not be dependent keys
 * `no-expr-in-dep-keys` Checks for expressions in the dependent keys
-* `no-push-object-in-loop` Rule to disallow use `pushObject(s)` inside loops (for very old Ember versions)
+* `no-push-object-in-loop` Rule to disallow use `pushObject(s)` inside loops (for very old Ember versions),
+* `no-empty-declaration` Rule to disallow empty `extend` for Ember Objects. Rule may be customized with `allowedFor` - list of types that may extended with nothing:
+
+```
+{
+    "rules": [
+        "ember-cleanup/no-empty-declaration": [2, {"allowedFor": ["Route", "Controller"]}]
+    ]
+}
+```
 
 ## Usage
 
@@ -134,6 +143,9 @@ Add to your eslint config-file:
     "ember-cleanup/no-expr-in-dep-keys": 2,
     "ember-cleanup/no-push-object-in-loop": [1, {
       "extraMemberExpression": ["forEach", "map"]
+    }],
+    "ember-cleanup/no-empty-declaration": [1, {
+        "allowedFor": ["Model"]
     }]
 }
 ```
