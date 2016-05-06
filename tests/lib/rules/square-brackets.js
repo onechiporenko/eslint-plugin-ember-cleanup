@@ -10,14 +10,15 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require("../../../lib/rules/one-level-each"),
+var rule = require("../../../lib/rules/square-brackets"),
   RuleTester = require("eslint").RuleTester;
 
 var Jsonium = require("jsonium");
 var j = new Jsonium();
 
-var m2 = "Multiple `@each` in the one dependent key are not allowed.";
-var m3 = "Deep `@each` in the dependent key is not allowed.";
+var m1 = "Dependent key should not end with `@each`, use `[]` instead.";
+var m2 = "`[]` should be at the end of the dependent key.";
+var m3 = "Dot should be before `[]`.";
 var keys = require("./keys.js");
 //------------------------------------------------------------------------------
 // Tests
@@ -26,15 +27,19 @@ var keys = require("./keys.js");
 var codes = keys.code;
 
 var validKeys = [
-  {KEYS: "'a.@each.b'"},
-  {KEYS: "'a.b.@each.c'"}
+  {KEYS: "'a.[]'"},
+  {KEYS: "'a.b.[]'"}
 ];
 
 var invalidKeys = [
-  {KEYS: "'a.@each.b.@each.c'", M: m2},
-  {KEYS: "'a.@each.{b,d}.@each.c'", M: m2},
-  {KEYS: "'a.@each.b.c'", M: m3},
-  {KEYS: "'a.{@each.b,d}.c'", M: m3}
+  {KEYS: "'a.@each'", M: m1},
+  {KEYS: "'a.{@each,b}'", M: m1},
+  {KEYS: "'a.[].b.[].c'", M: m2},
+  {KEYS: "'a.[].{b,d}.[].c'", M: m2},
+  {KEYS: "'a.[].b.c'", M: m2},
+  {KEYS: "'a.{[].b,d}.c'", M: m2},
+  {KEYS: "'a[]'", M: m3},
+  {KEYS: "'a{b,[]}'", M: m3}
 ];
 
 var validTestTemplates = [
@@ -73,7 +78,7 @@ var invalidTests = j
   .getCombos();
 
 var ruleTester = new RuleTester({env: {es6: true}});
-ruleTester.run("one-level-each", rule, {
+ruleTester.run("square-brackets", rule, {
   valid: validTests,
   invalid: invalidTests
 });

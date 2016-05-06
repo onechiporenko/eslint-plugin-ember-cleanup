@@ -85,6 +85,7 @@ Then configure the rules you want to use under the rules section.
 * `no-set-in-getter` Disallow `Ember.set`, `this.set` inside computed properties getters
 * `no-this-in-dep-keys` Check for dependent keys that starts with `this.`
 * `one-level-each` Checks for dependent keys with invalid `@each` usage
+* `square-brackets` Checks for dependent keys with invalid `[]` usage
 * `no-multi-dots` Checks for dependent keys that contains `..`
 * `no-typo-in-dep-keys` Rule to check possible typos in the dependent keys (it doesn't check short keys). Rule may be customized with `ignoreExclamationMark` - should keys like `!abc` and `abc` be processed as equal (`false` by default). **IMPORTANT** This rule is experimental and may do false alarms
 * `cp-macro-args-limit` Checks number of the dependent keys for computed macros
@@ -146,6 +147,7 @@ Add to your eslint config-file:
     }],
     "ember-cleanup/no-empty-declaration": [1, {
         "allowedFor": ["Model"]
-    }]
+    }],
+    "ember-cleanup/square-brackets": 2
 }
 ```
