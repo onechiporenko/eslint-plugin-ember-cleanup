@@ -102,6 +102,8 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
+* `no-define-property` Disallow usage `Ember.defineProperty`. Propose to use `Ember.mixin()`
+
 ## Usage
 
 Add to your eslint config-file:
@@ -148,6 +150,7 @@ Add to your eslint config-file:
     "ember-cleanup/no-empty-declaration": [1, {
         "allowedFor": ["Model"]
     }],
-    "ember-cleanup/square-brackets": 2
+    "ember-cleanup/square-brackets": 2,
+    "ember-cleanup/no-define-property": 1
 }
 ```
