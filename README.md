@@ -93,7 +93,6 @@ Then configure the rules you want to use under the rules section.
 * `no-expr-in-dep-keys` Checks for expressions in the dependent keys
 * `no-push-object-in-loop` Rule to disallow use `pushObject(s)` inside loops (for very old Ember versions),
 * `no-empty-declaration` Rule to disallow empty `extend` for Ember Objects. Rule may be customized with `allowedFor` - list of types that may extended with nothing:
-* `cp-macro-alias` Looks for Computed Properties that look like `computed.alias` but written as 'general' CP
 
 ```
 {
@@ -103,6 +102,7 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
+* `cp-macro-alias` Looks for Computed Properties that look like `computed.alias` but written as 'general' CP
 * `no-define-property` Disallow usage `Ember.defineProperty`. Propose to use `Ember.mixin()`
 
 ## Usage
