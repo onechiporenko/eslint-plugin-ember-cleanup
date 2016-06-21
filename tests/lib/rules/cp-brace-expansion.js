@@ -25,6 +25,9 @@ var m = "Some dependent keys may be grouped with Brace Expansion.";
 var codes = keys.code;
 
 var validKeysForExpand = [
+  {KEYS: "'a.{b,c.d}'"},
+  {KEYS: "'a','a.b'"},
+  {KEYS: "'b','a.b'"},
   {KEYS: "'a.b','b.c'"},
   {KEYS: "'a.b','b.c','c.d'"},
   {KEYS: "'a.b','b.c','e.c.d'"}
