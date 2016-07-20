@@ -104,6 +104,7 @@ Then configure the rules you want to use under the rules section.
 
 * `cp-macro-alias` Looks for Computed Properties that look like `computed.alias` but written as 'general' CP
 * `no-define-property` Disallow usage `Ember.defineProperty`. Propose to use `Ember.mixin()`
+* `no-declare-obj-components` Disallow for declarations arrays and objects in the components
 
 ## Usage
 
@@ -129,7 +130,7 @@ Add to your eslint config-file:
     "ember-cleanup/no-multi-dots": 1,
     "ember-cleanup/no-typo-in-dep-keys": [1, {
       "ignoreExclamationMark": true
-    }],
+    }],,
     "ember-cleanup/cp-macro-args-limit": [2, {"check": {
       "and": {"min": 2},
       "or": {"min": 2},
@@ -153,6 +154,7 @@ Add to your eslint config-file:
     }],
     "ember-cleanup/square-brackets": 2,
     "ember-cleanup/no-define-property": 1,
-    "ember-cleanup/cp-macro-alias": 2
+    "ember-cleanup/cp-macro-alias": 2,
+    "ember-cleanup/no-declare-obj-components": 2
 }
 ```
