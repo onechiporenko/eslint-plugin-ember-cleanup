@@ -31,7 +31,8 @@ var validProperties = [
   {PROPERTY: "a: ''"},
   {PROPERTY: "a: 1"},
   {PROPERTY: "a: null"},
-  {PROPERTY: "a: true"}
+  {PROPERTY: "a: true"},
+  {PROPERTY: "actions: {}"}
 ];
 
 var invalidProperties = [
