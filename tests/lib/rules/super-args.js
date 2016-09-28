@@ -48,9 +48,7 @@ var invalidFields = [
 
 var extend = [
   {EXT: "Ember.Object.extend({", END: "});"},
-  {EXT: "Ember.Object.extend(mixin, {", END: "});"},
-  {EXT: "extend({", END: "});"},
-  {EXT: "extend(mixin, {", END: "});"}
+  {EXT: "Ember.Object.extend(mixin, {", END: "});"}
 ];
 
 var validTestTemplates = [
