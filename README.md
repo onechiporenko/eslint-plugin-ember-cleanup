@@ -104,7 +104,16 @@ Then configure the rules you want to use under the rules section.
 
 * `cp-macro-alias` Looks for Computed Properties that look like `computed.alias` but written as 'general' CP
 * `no-define-property` Disallow usage `Ember.defineProperty`. Propose to use `Ember.mixin()`
-* `no-declare-obj-components` Disallow for declarations arrays and objects in the components
+* `no-declare-obj-components` Disallow for declarations arrays and objects in the components:
+
+```
+{
+  "rules": [
+    "ember-cleanup/no-declare-obj-components": [2, {"allowed": ["verifications"]}]
+  ]
+}
+```
+
 * `super-args` Check potential invalid calls `_super` without `...`
 * `route-model-return` Check that route's `model` return value
 
@@ -157,7 +166,9 @@ Add to your eslint config-file:
     "ember-cleanup/square-brackets": 2,
     "ember-cleanup/no-define-property": 1,
     "ember-cleanup/cp-macro-alias": 2,
-    "ember-cleanup/no-declare-obj-components": 2,
+    "ember-cleanup/no-declare-obj-components": [2, {
+      "allowed": ["verifications"]
+    }],
     "ember-cleanup/super-args": 2,
     "ember-cleanup/route-model-return": 1
 }
