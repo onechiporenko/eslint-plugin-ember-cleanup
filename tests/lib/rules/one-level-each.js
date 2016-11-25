@@ -27,7 +27,8 @@ var codes = keys.code;
 
 var validKeys = [
   {KEYS: "'a.@each.b'"},
-  {KEYS: "'a.b.@each.c'"}
+  {KEYS: "'a.b.@each.c'"},
+  {KEYS: "`a.@each.${b}`"}
 ];
 
 var invalidKeys = [

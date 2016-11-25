@@ -46,6 +46,7 @@ var validKeys = [
   {KEYS: "'a', 'b', 'c'"},
   {KEYS: "'a.b.c', 'd.e.f'"},
   {KEYS: "'a.@each.c'"},
+  {KEYS: "`a.@each.${b}`"},
   {KEYS: "'a.[]'"}
 ];
 

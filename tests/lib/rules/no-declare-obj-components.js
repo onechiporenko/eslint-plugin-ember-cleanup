@@ -32,7 +32,9 @@ var validProperties = [
   {PROPERTY: "a: 1"},
   {PROPERTY: "a: null"},
   {PROPERTY: "a: true"},
-  {PROPERTY: "actions: {}"}
+  {PROPERTY: "actions: {}"},
+  {PROPERTY: "actions: {}", ALLOWED: ["verifications"]},
+  {PROPERTY: "verifications: {}", ALLOWED: ["verifications"]}
 ];
 
 var invalidProperties = [
@@ -47,7 +49,8 @@ var validTestTemplates = [
     code:
       "{{COMPONENT}}.extend({" +
         "{{PROPERTY}}" +
-      "});"
+      "});",
+    options: [{allowed: ["{{ALLOWED}}"]}]
   }
 ];
 
@@ -67,7 +70,7 @@ var validTests = j
   .setTemplates(validTestTemplates)
   .createCombos(["code"], components)
   .useCombosAsTemplates()
-  .createCombos(["code"], validProperties)
+  .createCombos(["code", "options.0.allowed.0"], validProperties)
   .uniqueCombos()
   .getCombos();
 
