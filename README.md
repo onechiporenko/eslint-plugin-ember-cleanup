@@ -116,6 +116,7 @@ Then configure the rules you want to use under the rules section.
 
 * `super-args` Check potential invalid calls `_super` without `...`
 * `route-model-return` Check that route's `model` return value
+* `no-dep-keys-loop` Check for loops in the dependent keys of the computed properties
 
 ## Usage
 
@@ -170,6 +171,7 @@ Add to your eslint config-file:
       "allowed": ["verifications"]
     }],
     "ember-cleanup/super-args": 2,
-    "ember-cleanup/route-model-return": 1
+    "ember-cleanup/route-model-return": 1.
+    "ember-cleanup/no-dep-keys-loop": 2
 }
 ```
