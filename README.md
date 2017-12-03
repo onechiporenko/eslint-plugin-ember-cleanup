@@ -66,8 +66,8 @@ Deprecated and removed:
 | Rule | Reason |
 |------|--------|
 | `no-declare-obj-components` | Use `ember/avoid-leaking-state-in-ember-objects` from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember) |
-| `no-set-in-getter` | Use `no-side-effects` from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember) |
-| `no-dup-keys` | Use `no-duplicate-dependent-keys` from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember) |
+| `no-set-in-getter` | Use `ember/no-side-effects` from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember) |
+| `no-dup-keys` | Use `ember/no-duplicate-dependent-keys` from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember) |
 | `destructuring` | It's not needed for modules API |
 | `no-define-property` | `defineProperty` is private, so it must not be used at all |
 | `no-console` | Proposed `Ember.Logger` is private, so rule may be replaced with `no-console` from ESLint | 
