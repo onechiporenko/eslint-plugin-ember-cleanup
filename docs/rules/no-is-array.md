@@ -2,7 +2,7 @@
 
 ### Rule name: `no-is-array`
 
-Checks for array detection and propose to use `isArray` from `@ember/array`;
+Checks for array detection and propose to use `isArray` from `@ember/array`
 
 ### Usage
 
