@@ -27,9 +27,13 @@ Add `ember-cleanup` to the plugins section of your `.eslintrc` configuration fil
 
 ```json
 {
-    "plugins": [
-        "ember-cleanup"
-    ]
+  "plugins": [
+    "ember-cleanup"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:ember-cleanup/recommended"
+  ]
 }
 ```
 
@@ -67,22 +71,3 @@ Deprecated and removed:
 | `destructuring` | It's not needed for modules API |
 | `no-define-property` | `defineProperty` is private, so it must not be used at all |
 | `no-console` | Proposed `Ember.Logger` is private, so rule may be replaced with `no-console` from ESLint | 
-
-## Usage
-
-Add to your eslint config-file:
-
-```json
-{
-  "plugins": [
-    "ember-cleanup"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:ember-cleanup/recommended" // or 'plugin:ember/base'
-  ],
-  "rules": {
-    // override rules' settings here
-  }
-}
-```
