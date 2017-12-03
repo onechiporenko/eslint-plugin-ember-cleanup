@@ -16,7 +16,7 @@ var rule = require("../../../lib/rules/no-throw"),
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
-var m = "`Ember.assert` is better.";
+var m = "`assert` from `@ember/debug` is better.";
 
 var validTests = [
   {

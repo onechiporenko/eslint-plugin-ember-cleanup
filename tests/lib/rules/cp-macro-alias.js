@@ -16,7 +16,7 @@ var rule = require("../../../lib/rules/cp-macro-alias"),
 var Jsonium = require("jsonium");
 var j = new Jsonium();
 
-var m = "May be simplified to `computed.alias`";
+var m = "May be simplified to `alias` from `@ember/object/computed`";
 
 //------------------------------------------------------------------------------
 // Tests

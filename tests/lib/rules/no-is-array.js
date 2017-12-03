@@ -19,7 +19,7 @@ var j = new Jsonium();
 // Tests
 //------------------------------------------------------------------------------
 
-var m = "`Ember.isArray` is better to detect arrays and array-like variables.";
+var m = "`isArray` from `@ember/array` is better to detect arrays and array-like variables.";
 
 var operators = [
   {OPERATOR: "==="},

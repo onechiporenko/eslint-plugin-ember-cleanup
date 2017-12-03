@@ -18,7 +18,7 @@ var j = new Jsonium();
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
-var m = "`Ember.run.{{M}}` should be used.";
+var m = "`{{M}}` from `@ember/run` should be used.";
 
 var validTests = [
   {code: "Ember.run.later(obj, function () {}, 1000);"},

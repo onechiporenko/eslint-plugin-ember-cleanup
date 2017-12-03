@@ -14,13 +14,13 @@
     "test": "./node_modules/.bin/eslint . && mocha -R min tests/lib/rules"
   },
   "dependencies": {
-    "object-path": "^0.9.2",
+    "object-path": "^0.11.4",
     "requireindex": "~1.1.0"
   },
   "devDependencies": {
-    "eslint": "~1.2.0",
+    "eslint": "^4.12.0",
     "jsonium": "^1.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^4.0.0"
   },
   "repository": "https://github.com/onechiporenko/eslint-plugin-ember-cleanup",
   "engines": {

@@ -33,145 +33,86 @@ Add `ember-cleanup` to the plugins section of your `.eslintrc` configuration fil
 }
 ```
 
-
-Then configure the rules you want to use under the rules section.
-
-```json
-{
-    "rules": {
-        "ember-cleanup/rule-name": 2
-    }
-}
-```
-
 ## Supported Rules
 
-* `destructuring` Looks for usage `Ember.*` many times and propose to replace it with `const {} = Ember;` 
-* `max-dep-keys` Checks number of dependent keys for observers and computed properties. Rule may be customized with `max` - maximum number of dependent keys (default `3`), `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
+| Rule | Description |
+|----- | ------------|
+| [max-dep-keys](./docs/rules/max-dep-keys.md)| Checks number of dependent keys |
+| [no-settimeout](./docs/rules/no-settimeout.md) | Proposes to use `run`-methods instead of `setTimeout` |
+| [no-throw](./docs/rules/no-throw.md) | Proposes to use `assert` from `@ember/debug` instead of throwing errors |
+| [no-typeof](./docs/rules/no-typeof.md) | Proposes to use `typeOf` from `@ember/utils` instead of  built-in `typeof` for some types check |
+| [cp-brace-expansion](./docs/rules/cp-brace-expansion.md) | Checks dependent keys for possibility to do brace expansion |
+| [no-is-array](./docs/rules/no-is-array.md) | Checks for array detection and propose to use `isArray` from `@ember/array` |
+| [no-this-in-dep-keys](./docs/rules/no-this-in-dep-keys.md) | Checks dependent keys for `this.`-prefix |
+| [one-level-each](./docs/rules/one-level-each.md) | Checks `@each` usage in the dependent keys |
+| [square-brackets](./docs/rules/square-brackets.md) | Checks `[]` usage in the dependent keys |
+| [no-multi-dots](./docs/rules/no-multi-dots.md) | Checks dependent keys to not contain `..` |
+| [no-typo-in-dep-keys](./docs/rules/no-typo-in-dep-keys.md) | Checks possible typos in the dependent keys (it doesn't check short keys) |
+| [cp-macro-args-limit](./docs/rules/cp-macro-args-limit.md) | Checks dependent keys count |
+| [cp-macro-not-key](./docs/rules/cp-macro-not-key.md) | Checks arguments for computed macros to not be dependent keys |
+| [no-expr-in-dep-keys](./docs/rules/no-expr-in-dep-keys.md) | Checks dependent keys to not contain expressions |
+| [no-empty-declaration](./docs/rules/no-empty-declaration.md) | Disallow empty `extend` for Ember Objects |
+| [cp-macro-alias](./docs/rules/cp-macro-alias.md) | Looks for Computed Properties that look like `computed.alias` but are written as 'general' CP |
+| [super-args](./docs/rules/super-args.md) | Checks potential invalid calls `_super` without `...` |
+| [route-model-return](./docs/rules/route-model-return.md) | Checks that `model` hook returns a value |
+| [no-dep-keys-loop](./docs/rules/no-dep-keys-loop.md) | Checks for loops in the dependent keys |
 
-```
-{
-    "rules": [
-        "ember-cleanup/max-dep-keys": [2, {"max": 5, "tryExpandKeys": true}]
-    ]
-}
-```
+Deprecated and removed:
 
-* `no-console` Propose to use `Ember.Logger` instead of `console`
-* `no-dup-keys` Checks for duplicated dependent keys for observers and computed properties. Rule may be customized with `tryExpandKeys` - should keys like `a.{b,c}` be 1 key or it should be expanded to two keys - `a.b, a.c`. Default - `false`
-
-```
-{
-    "rules": [
-        "ember-cleanup/no-dup-keys": [2, {"tryExpandKeys": true}]
-    ]
-}
-```
-
-* `no-settimeout` Propose to use `Ember.run.later` instead of `setTimeout`
-* `no-throw` Propose to use `Ember.assert` instead of throwing errors
-* `no-typeof` Propose to use `Ember.typeOf` instead of  built-in `typeof` for some types check
-
-```
-{
-    "rules: [
-        "ember-cleanup/no-typeof": [2, {disallowed: ["object"]}]
-    ]
-}
-```
-
-* `cp-brace-expansion` Checks dependent keys for possibility to do brace expansion
-* `no-is-array` Checks for array detection and propose to use `Ember.isArray`
-* `no-set-in-getter` Disallow `Ember.set`, `this.set` inside computed properties getters
-* `no-this-in-dep-keys` Check for dependent keys that starts with `this.`
-* `one-level-each` Checks for dependent keys with invalid `@each` usage
-* `square-brackets` Checks for dependent keys with invalid `[]` usage
-* `no-multi-dots` Checks for dependent keys that contains `..`
-* `no-typo-in-dep-keys` Rule to check possible typos in the dependent keys (it doesn't check short keys). Rule may be customized with `ignoreExclamationMark` - should keys like `!abc` and `abc` be processed as equal (`false` by default). **IMPORTANT** This rule is experimental and may do false alarms
-* `cp-macro-args-limit` Checks number of the dependent keys for computed macros
-* `cp-macro-not-key` Checks arguments for computed macros to not be dependent keys
-* `no-expr-in-dep-keys` Checks for expressions in the dependent keys
-* `no-push-object-in-loop` Rule to disallow use `pushObject(s)` inside loops (for very old Ember versions),
-* `no-empty-declaration` Rule to disallow empty `extend` for Ember Objects. Rule may be customized with `allowedFor` - list of types that may extended with nothing:
-
-```
-{
-    "rules": [
-        "ember-cleanup/no-empty-declaration": [2, {"allowedFor": ["Route", "Controller"]}]
-    ]
-}
-```
-
-* `cp-macro-alias` Looks for Computed Properties that look like `computed.alias` but written as 'general' CP
-* `no-define-property` Disallow usage `Ember.defineProperty`. Propose to use `Ember.mixin()`
-* `no-declare-obj-components` Disallow for declarations arrays and objects in the components:
-
-```
-{
-  "rules": [
-    "ember-cleanup/no-declare-obj-components": [2, {"allowed": ["verifications"]}]
-  ]
-}
-```
-
-* `super-args` Check potential invalid calls `_super` without `...`
-* `route-model-return` Check that route's `model` return value
-* `no-dep-keys-loop` Check for loops in the dependent keys of the computed properties
+| Rule | Reason |
+|------|--------|
+| `no-declare-obj-components` | Use `ember/avoid-leaking-state-in-ember-objects` from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember) |
+| `no-set-in-getter` | Use `no-side-effects` from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember) |
+| `no-dup-keys` | Use `no-duplicate-dependent-keys` from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember) |
+| `destructuring` | It's not needed for modules API |
+| `no-define-property` | `defineProperty` is private, so it must not be used at all |
+| `no-console` | Proposed `Ember.Logger` is private, so rule may be replaced with `no-console` from ESLint | 
 
 ## Usage
 
 Add to your eslint config-file:
 
-```javascript
-"plugins": [
-    "ember-cleanup"
-],
-"rules": {
-    "ember-cleanup/destructuring": 1,
-    "ember-cleanup/max-dep-keys": [2, {"max": 5, "tryExpandKeys": true}],
-    "ember-cleanup/no-console": 1,
-    "ember-cleanup/no-dup-keys": [2, {"tryExpandKeys": true}],
-    "ember-cleanup/no-settimeout": 2,
-    "ember-cleanup/no-throw": 2,
-    "ember-cleanup/no-typeof": [2, {"disallowed": ["object"]}],
-    "ember-cleanup/cp-brace-expansion": 2,
-    "ember-cleanup/no-is-array": 2,
-    "ember-cleanup/no-set-in-getter": 2,
-    "ember-cleanup/no-this-in-dep-keys": 2,
-    "ember-cleanup/one-level-each": 2,
-    "ember-cleanup/no-multi-dots": 1,
-    "ember-cleanup/no-typo-in-dep-keys": [1, {
-      "ignoreExclamationMark": true
-    }],
-    "ember-cleanup/cp-macro-args-limit": [2, {"check": {
-      "and": {"min": 2},
-      "or": {"min": 2},
-      "max": {"eq": 1},
-      "min": {"eq": 1}
-    }}],
-    "ember-cleanup/cp-macro-not-key": [2, {"check": {
-      "equal": [1],
-      "filterBy": [2],
-      "gt": [1],
-      "gte": [1],
-      "lt": [1],
-      "lte": [1]
-    }}],
-    "ember-cleanup/no-expr-in-dep-keys": 2,
-    "ember-cleanup/no-push-object-in-loop": [1, {
-      "extraMemberExpression": ["forEach", "map"]
-    }],
-    "ember-cleanup/no-empty-declaration": [1, {
-        "allowedFor": ["Model"]
-    }],
-    "ember-cleanup/square-brackets": 2,
-    "ember-cleanup/no-define-property": 1,
-    "ember-cleanup/cp-macro-alias": 2,
-    "ember-cleanup/no-declare-obj-components": [2, {
-      "allowed": ["verifications"]
-    }],
-    "ember-cleanup/super-args": 2,
-    "ember-cleanup/route-model-return": 1.
-    "ember-cleanup/no-dep-keys-loop": 2
+```json
+{
+  "plugins": [
+      "ember-cleanup"
+  ],
+  "rules": {
+      "ember-cleanup/max-dep-keys": [2, {"max": 5, "tryExpandKeys": true}],
+      "ember-cleanup/no-settimeout": 2,
+      "ember-cleanup/no-throw": 2,
+      "ember-cleanup/no-typeof": [2, {"disallowed": ["object"]}],
+      "ember-cleanup/cp-brace-expansion": 2,
+      "ember-cleanup/no-is-array": 2,
+      "ember-cleanup/no-this-in-dep-keys": 2,
+      "ember-cleanup/one-level-each": 2,
+      "ember-cleanup/no-multi-dots": 1,
+      "ember-cleanup/no-typo-in-dep-keys": [1, {
+        "ignoreExclamationMark": true
+      }],
+      "ember-cleanup/cp-macro-args-limit": [2, {"check": {
+        "and": {"min": 2},
+        "or": {"min": 2},
+        "max": {"eq": 1},
+        "min": {"eq": 1}
+      }}],
+      "ember-cleanup/cp-macro-not-key": [2, {"check": {
+        "equal": [1],
+        "filterBy": [2],
+        "gt": [1],
+        "gte": [1],
+        "lt": [1],
+        "lte": [1]
+      }}],
+      "ember-cleanup/no-expr-in-dep-keys": 2,
+      "ember-cleanup/no-empty-declaration": [1, {
+          "allowedFor": ["Model"]
+      }],
+      "ember-cleanup/square-brackets": 2,
+      "ember-cleanup/cp-macro-alias": 2,
+      "ember-cleanup/super-args": 2,
+      "ember-cleanup/route-model-return": 1,
+      "ember-cleanup/no-dep-keys-loop": 2
+  }
 }
 ```

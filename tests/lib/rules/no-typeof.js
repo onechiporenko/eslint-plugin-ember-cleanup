@@ -19,7 +19,7 @@ var j = new Jsonium();
 // Tests
 //------------------------------------------------------------------------------
 
-var m = "`Ember.typeOf` can give more accurate result.";
+var m = "`typeOf` from `@ember/utils` can give more accurate result.";
 var operators = [
   {OPERATOR: "==="},
   {OPERATOR: "=="},
