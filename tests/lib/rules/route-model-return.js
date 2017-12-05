@@ -35,7 +35,8 @@ var invalidModels = [
   {MODEL: "model() {this.get('store').findAll('type');}"},
   {MODEL: "model: function() {this.get('store').findAll('type');}"},
   {MODEL: "model() {return;}"},
-  {MODEL: "model: function() {return;}"}
+  {MODEL: "model: function() {return;}"},
+  {MODEL: "model: function() {}"}
 ];
 
 var extend = [
