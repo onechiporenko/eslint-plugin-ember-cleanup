@@ -18,7 +18,7 @@
     "requireindex": "~1.1.0"
   },
   "devDependencies": {
-    "eslint": "^4.12.0",
+    "eslint": "^8.0.0",
     "jsonium": "^1.5.0",
     "mocha": "^4.0.0"
   },
